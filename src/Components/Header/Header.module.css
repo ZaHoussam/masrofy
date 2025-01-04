@@ -1,0 +1,30 @@
+.header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+
+.header .logo {
+  font-size: 24px;
+  text-transform: uppercase;
+  color: var(--txt-black);
+}
+
+.header .navigation {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header .navigation a {
+  color: var(--txt-black);
+  transition: 0.4s;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header .navigation a:is(:hover, .active) {
+  color: var(--hover);
+}
