@@ -6,22 +6,34 @@ import {
   TransactionList,
   VisualReports,
 } from "./Pages/index";
-import { Header, Mode } from "./Components/index";
+import { Header } from "./Components/index";
 
 const App = () => {
-  const [theme, setTheme] = useState("light");
+  const [transactions, setTransactions] = useState(() => {
+    // Load transactions from localStorage on initial render
+    const savedTransactions = localStorage.getItem("transactions");
+    return savedTransactions ? JSON.parse(savedTransactions) : [];
+  });
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.body.className = savedTheme;
-  }, []);
+    // Save transactions to localStorage whenever they change
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.body.className = newTheme;
+  const addTransaction = (transaction) => {
+    setTransactions([...transactions, transaction]);
+  };
+
+  const deleteTransaction = (index) => {
+    const updatedTransactions = transactions.filter((_, i) => i !== index);
+    setTransactions(updatedTransactions);
+  };
+
+  const editTransaction = (index, updatedTransaction) => {
+    const updatedTransactions = transactions.map((transaction, i) =>
+      i === index ? updatedTransaction : transaction
+    );
+    setTransactions(updatedTransactions);
   };
 
   return (
@@ -29,13 +41,28 @@ const App = () => {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/add-transaction" element={<AddTransaction />} />
-          <Route path="/transactions" element={<TransactionList />} />
-          <Route path="/reports" element={<VisualReports />} />
+          <Route path="/" element={<Home transactions={transactions} />} />
+          <Route
+            path="/add-transaction"
+            element={<AddTransaction addTransaction={addTransaction} />}
+          />
+          <Route
+            path="/transactions"
+            element={
+              <TransactionList
+                transactions={transactions}
+                deleteTransaction={deleteTransaction}
+                editTransaction={editTransaction}
+              />
+            }
+          />
+          <Route
+            path="/reports"
+            element={<VisualReports transactions={transactions} />}
+          />
         </Routes>
       </Router>
-      <Mode onClick={toggleTheme} />
+      {/* <Mode onClick={toggleTheme} /> */}
     </>
   );
 };

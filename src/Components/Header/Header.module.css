@@ -2,8 +2,12 @@
   height: 80px;
   display: flex;
   align-items: center;
+}
+
+.header_content {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 0 50px;
 }
 
 .header .logo {
