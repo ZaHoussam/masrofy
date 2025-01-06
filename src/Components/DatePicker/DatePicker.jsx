@@ -54,7 +54,7 @@ const DatePicker = ({
       "0"
     )}-${String(day).padStart(2, "0")}`;
     onChange(newSelectedDate); // Notify parent about the date change
-    toggleCalendar(); // Close calendar after date selection
+    // toggleCalendar(); // Close calendar after date selection
   };
 
   const generateCalendarDays = () => {

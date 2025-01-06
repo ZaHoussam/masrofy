@@ -1,5 +1,11 @@
 .transaction {
   padding: 20px 0;
+  height: calc(100vh - 80px);
+  transition: 0.4s;
+}
+
+.transaction.dark {
+  background-color: #141218;
 }
 
 .transaction .title {
@@ -10,8 +16,14 @@
   margin-bottom: 20px;
   text-align: center;
   font-weight: 700;
+  transition: 0.4s;
 }
 
+.transaction.dark h1 {
+  color: var(--txt-white);
+}
+
+/* * Table */
 .transaction :is(.table_container, .table_body)::-webkit-scrollbar-track {
   background-color: #f1f1f1;
 }
@@ -29,9 +41,9 @@
   background-color: #555;
 }
 
-/* * Table */
 .transaction .table_container {
   overflow-x: auto;
+  box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
 }
 
 .transaction .table_container::-webkit-scrollbar {
@@ -39,12 +51,11 @@
 }
 
 .transaction .table {
-  width: 1035px;
+  width: 1075.2px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   transition: 0.4s;
-  box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -55,7 +66,7 @@
 .transaction :is(.table_header, .row) {
   display: grid;
   transition: 0.4s;
-  grid-template-columns: repeat(6, 170px);
+  grid-template-columns: repeat(6, 179.2px);
 }
 
 .transaction .table_header {
@@ -257,7 +268,7 @@
 .transaction .action {
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-left: 15px;
   gap: 10px;
 }
 

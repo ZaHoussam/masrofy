@@ -1,0 +1,37 @@
+.not-found .title {
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--txt-black);
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+  transition: 0.4s;
+}
+
+.not-found a {
+  font-size: 24px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: var(--txt-black);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: 0.4s;
+}
+
+.not-found a:hover {
+  color: var(--hover);
+}
+
+.not-found a svg {
+  fill: var(--txt-black);
+  transition: 0.4s;
+}
+
+.not-found a:hover svg {
+  fill: var(--hover);
+}

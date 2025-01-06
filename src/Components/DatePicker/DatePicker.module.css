@@ -207,7 +207,7 @@
 .calendar :is(.day_of_week, .day) {
   display: grid;
   place-items: center;
-  height: 44px;
+  height: 35px;
   color: #141414;
   transition: 0.4s;
 }

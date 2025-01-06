@@ -1,0 +1,118 @@
+.reports {
+  padding: 20px 0;
+  height: calc(100vh - 80px);
+  position: relative;
+}
+
+.reports .title {
+  font-size: 30px;
+  color: var(--txt-black);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.reports .charts {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  gap: 20px;
+}
+
+.reports .charts .chart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.reports .charts .chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.report-content {
+  position: relative;
+}
+
+.reports .download-buttons {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reports .download-buttons button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+.reports .download-buttons button:first-child {
+  background-color: #209978;
+}
+
+.reports .download-buttons button:last-child {
+  background-color: #de2429;
+}
+
+.reports .download-buttons button,
+.button__icon,
+.button__text {
+  transition: all 0.3s;
+}
+
+.reports .download-buttons button .button__text {
+  transform: translateX(22px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.reports .download-buttons button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reports .download-buttons button:first-child .button__icon {
+  background-color: #17795e;
+}
+
+.reports .download-buttons button:last-child .button__icon {
+  background-color: #e53935;
+}
+
+.reports .download-buttons button svg {
+  width: 20px;
+  fill: #fff;
+}
+
+.reports .download-buttons button:hover .button__text {
+  color: transparent;
+}
+
+.reports .download-buttons button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.reports .download-buttons button:first-child:active .button__icon {
+  background-color: #146c54;
+}
+
+.reports .download-buttons button:last-child:active .button__icon {
+  background-color: #de2429;
+}

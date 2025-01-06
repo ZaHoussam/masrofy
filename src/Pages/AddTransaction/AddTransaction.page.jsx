@@ -14,6 +14,13 @@ const AddTransaction = ({ addTransaction }) => {
   });
 
   const [calendarVisible, setCalendarVisible] = useState(false); // state for calendar visibility
+  const [isActive, setIsActive] = useState(false);
+
+  const statuses = [
+    { label: "Groceries", value: "Groceries" },
+    { label: "Transportation", value: "Transportation" },
+    { label: "Entertainment", value: "Entertainment" },
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,17 +48,6 @@ const AddTransaction = ({ addTransaction }) => {
     }
   };
 
-  const [isActive, setIsActive] = useState(false);
-
-  const statuses = [
-    { label: "Groceries", value: "Groceries" },
-    {
-      label: "Transportation",
-      value: "Transportation",
-    },
-    { label: "Entertainment", value: "Entertainment" },
-  ];
-
   const handleSelectClick = () => {
     setIsActive(!isActive);
   };
@@ -70,6 +66,16 @@ const AddTransaction = ({ addTransaction }) => {
 
   const toggleCalendar = () => setCalendarVisible(!calendarVisible); // Toggle calendar visibility
 
+  // Handle date change without submitting the form
+  const handleDateChange = (date) => {
+    setTransaction({ ...transaction, date: date });
+  };
+
+  // Prevent form submission when changing the month/year
+  const handleMonthYearChange = (e) => {
+    e.stopPropagation(); // Prevent form submission when changing month/year
+  };
+
   return (
     <section className={style.transaction}>
       <div className="container">
@@ -78,7 +84,11 @@ const AddTransaction = ({ addTransaction }) => {
             <img src={transactionImg} alt="transaction" />
           </div>
           <div className={style.action}>
-            <form onSubmit={handleSubmit} className={style.form}>
+            <form
+              onSubmit={handleSubmit}
+              className={style.form}
+              onClick={(e) => e.stopPropagation()} // Prevent form submission on click inside form
+            >
               <div className={style.input}>
                 <input
                   type="text"
@@ -100,14 +110,12 @@ const AddTransaction = ({ addTransaction }) => {
                   required
                 />
               </div>
-              {/* Date Picker Component */}
               <DatePicker
                 selectedDate={transaction.date}
-                onChange={(date) =>
-                  setTransaction({ ...transaction, date: date })
-                }
-                calendarVisible={calendarVisible} // Pass visibility state
-                toggleCalendar={toggleCalendar} // Pass toggle function
+                onChange={handleDateChange} // Update date without submitting the form
+                calendarVisible={calendarVisible}
+                toggleCalendar={toggleCalendar}
+                onMonthYearChange={handleMonthYearChange} // Prevent form submission when changing month/year
               />
               <div className={style.group}>
                 <div

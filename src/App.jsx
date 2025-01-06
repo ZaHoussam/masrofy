@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Home,
   AddTransaction,
@@ -9,16 +9,7 @@ import {
 import { Header } from "./Components/index";
 
 const App = () => {
-  const [transactions, setTransactions] = useState(() => {
-    // Load transactions from localStorage on initial render
-    const savedTransactions = localStorage.getItem("transactions");
-    return savedTransactions ? JSON.parse(savedTransactions) : [];
-  });
-
-  useEffect(() => {
-    // Save transactions to localStorage whenever they change
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-  }, [transactions]);
+  const [transactions, setTransactions] = useState([]);
 
   const addTransaction = (transaction) => {
     setTransactions([...transactions, transaction]);
@@ -37,33 +28,30 @@ const App = () => {
   };
 
   return (
-    <>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home transactions={transactions} />} />
-          <Route
-            path="/add-transaction"
-            element={<AddTransaction addTransaction={addTransaction} />}
-          />
-          <Route
-            path="/transactions"
-            element={
-              <TransactionList
-                transactions={transactions}
-                deleteTransaction={deleteTransaction}
-                editTransaction={editTransaction}
-              />
-            }
-          />
-          <Route
-            path="/reports"
-            element={<VisualReports transactions={transactions} />}
-          />
-        </Routes>
-      </Router>
-      {/* <Mode onClick={toggleTheme} /> */}
-    </>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home transactions={transactions} />} />
+        <Route
+          path="/add-transaction"
+          element={<AddTransaction addTransaction={addTransaction} />}
+        />
+        <Route
+          path="/transactions"
+          element={
+            <TransactionList
+              transactions={transactions}
+              deleteTransaction={deleteTransaction}
+              editTransaction={editTransaction}
+            />
+          }
+        />
+        <Route
+          path="/reports"
+          element={<VisualReports transactions={transactions} />}
+        />
+      </Routes>
+    </Router>
   );
 };
 
