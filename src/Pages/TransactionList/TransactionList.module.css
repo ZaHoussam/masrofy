@@ -1,0 +1,269 @@
+.transaction {
+  padding: 20px 0;
+}
+
+.transaction .title {
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--txt-black);
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.transaction :is(.table_container, .table_body)::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.transaction.dark :is(.table_container, .table_body)::-webkit-scrollbar-track {
+  background-color: #0d0d0d;
+}
+
+.transaction :is(.table_container, .table_body)::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.transaction :is(.table_container, .table_body)::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* * Table */
+.transaction .table_container {
+  overflow-x: auto;
+}
+
+.transaction .table_container::-webkit-scrollbar {
+  height: 5px;
+}
+
+.transaction .table {
+  width: 1035px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: 0.4s;
+  box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.transaction.dark .table {
+  background-color: #0d0d0d;
+}
+
+.transaction :is(.table_header, .row) {
+  display: grid;
+  transition: 0.4s;
+  grid-template-columns: repeat(6, 170px);
+}
+
+.transaction .table_header {
+  background-color: #f4f6f9;
+  color: #394452;
+}
+
+.transaction.dark .table_header {
+  background-color: #141218;
+  color: #fff;
+}
+
+.transaction .table_body {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.transaction .table_body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.transaction .row {
+  border-bottom: 1px solid #f4f6f9;
+}
+
+.transaction.dark .row {
+  border-bottom: 1px solid #141218;
+}
+
+.transaction .row:hover {
+  background-color: #f4f6f9;
+}
+
+.transaction.dark .row:hover {
+  background-color: #141218;
+}
+
+.transaction .table :is(h3, .col) {
+  padding-left: 15px;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.transaction .table .col {
+  color: #545d69;
+  transition: 0.4s;
+}
+
+.transaction.dark .table .col {
+  color: #bdbdbd;
+}
+
+/* * Profile */
+
+.transaction .table .col_2 {
+  column-gap: 5px;
+}
+
+.transaction .table .col_2 .img {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+}
+
+.transaction .table .col_2 .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* * Status */
+
+.transaction .table .col_3 {
+  column-gap: 10px;
+}
+
+.transaction .table .col_3 .status_circle {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.transaction .table .col_3.complete .status_circle {
+  background-color: #287d3c;
+}
+
+.transaction.dark .table .col_3.complete .status_circle {
+  background-color: #3bb758;
+}
+
+.transaction .table .col_3.pending .status_circle {
+  background-color: #da1414;
+}
+
+.transaction.dark .table .col_3.pending .status_circle {
+  background-color: #ef4c4c;
+}
+
+.transaction .table .col_3.in_progress .status_circle {
+  background-color: #2e5aac;
+}
+
+.transaction.dark .table .col_3.in_progress .status_circle {
+  background-color: #5581d2;
+}
+
+/* * Skills */
+
+.transaction .table .col_4 .txt {
+  display: block;
+  width: fit-transaction;
+  border-radius: 13px;
+  border: 1px solid;
+  padding: 2px 10px;
+  font-weight: 600;
+}
+
+.transaction .table .col_4.marketing .txt {
+  border-color: #394452;
+  color: #394452;
+}
+
+.transaction.dark .table .col_4.marketing .txt {
+  border-color: #bdbdbd;
+  color: #bdbdbd;
+}
+
+.transaction .table .col_4.dev .txt {
+  border-color: #e86c00;
+  color: #e86c00;
+}
+
+.transaction.dark .table .col_4.dev .txt {
+  border-color: #ff9436;
+  color: #ff9436;
+}
+
+.transaction .table .col_4.finance .txt {
+  border-color: #287d3c;
+  color: #287d3c;
+}
+
+.transaction.dark .table .col_4.finance .txt {
+  border-color: #3bb758;
+  color: #3bb758;
+}
+
+.transaction .table .col_4.sales .txt {
+  border-color: #2e5aac;
+  color: #2e5aac;
+}
+
+.transaction.dark .table .col_4.sales .txt {
+  border-color: #5581d2;
+  color: #5581d2;
+}
+
+/* * Ratings */
+.transaction .table .col_5 {
+  column-gap: 5px;
+}
+
+.transaction .table .col_5 .star {
+  display: block;
+  width: 21px;
+  height: 21px;
+  position: relative;
+}
+
+.transaction .table .col_5 .star img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.transaction .table .col_5 .star img:first-child {
+  opacity: 1;
+}
+
+.transaction .table .col_5 .star img:last-child {
+  opacity: 0;
+}
+
+.transaction.dark .table .col_5 .star img:first-child {
+  opacity: 0;
+}
+
+.transaction.dark .table .col_5 .star img:last-child {
+  opacity: 1;
+}
+
+.transaction .action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.transaction .action button {
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+}

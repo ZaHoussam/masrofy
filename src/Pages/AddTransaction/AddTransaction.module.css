@@ -4,6 +4,12 @@
   height: calc(100vh - 80px);
 }
 
+@media screen and (max-width: 991px) {
+  .transaction {
+    align-items: flex-start;
+  }
+}
+
 .transaction_content {
   display: flex;
   gap: 30px;
@@ -11,14 +17,14 @@
   position: relative;
 }
 
-.transaction_content :is(.info, .image, .action) {
+.transaction_content :is(.image, .action) {
   flex: 1;
   z-index: 2;
 }
 
-/* ^ Info */
+/* ^ Image */
 
-.transaction_content .info {
+.transaction_content .image {
   display: flex;
   flex-direction: column;
   row-gap: 30px;
@@ -27,8 +33,14 @@
   z-index: 2;
 }
 
-.transaction_content .info::before,
-.transaction_content .info::after {
+@media screen and (max-width: 991px) {
+  .transaction_content .image {
+    display: none;
+  }
+}
+
+.transaction_content .image::before,
+.transaction_content .image::after {
   content: "";
   position: absolute;
   width: 226px;
@@ -38,34 +50,18 @@
   filter: blur(150px);
 }
 
-.transaction_content .info::before {
+.transaction_content .image::before {
   background-color: #dda82a;
   left: 0;
   top: 0;
 }
 
-.transaction_content .info::after {
-  background-color: var(--secondary-light-color);
+.transaction_content .image::after {
+  background-color: var(--hover);
   right: 0;
   bottom: 0;
 }
 
-.transaction_content .info .title {
-  font-size: 50px;
-  color: var(--primary-light-txt);
-  transition: 0.7s;
-  letter-spacing: 1px;
-}
-
-.transaction_content .info .desc {
-  font-size: 23px;
-  color: var(--primary-light-txt);
-  transition: 0.7s;
-  line-height: 1.5;
-  font-weight: 600;
-}
-
-/* ^ Image */
 .transaction_content .image img {
   width: 100%;
 }
@@ -130,4 +126,246 @@
 
 .transaction_content .form input[type="submit"]:hover {
   opacity: 0.9;
+}
+
+.group {
+  position: relative;
+  user-select: none;
+}
+
+.group .selected {
+  width: 100%;
+  height: 50px;
+  background-color: #eaf0f7;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0px 30px 65px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  color: #4f555a;
+  border-radius: 10px;
+}
+
+.group .selected.active svg {
+  transition: 0.4s;
+  transform: rotate(-180deg);
+}
+
+.group .selected .txt {
+  text-transform: capitalize;
+  padding: 0 5px;
+}
+
+.group .select_list {
+  width: 100%;
+  background-color: #eaf0f7;
+  list-style-type: none;
+  transition: 0.4s;
+  box-shadow: 0px 30px 65px 0px rgba(0, 0, 0, 0.1);
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 2;
+  top: 55px;
+  border-radius: 10px;
+}
+
+.group .select_list.active {
+  height: 150px;
+}
+
+.group .select_list li {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  padding-left: 30px;
+  padding-right: 20px;
+  transition: 0.4s;
+  cursor: pointer;
+  position: relative;
+  color: #4f555a;
+}
+
+.group .select_list li::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 15px;
+}
+
+.group .select_list li.active::after {
+  content: "in use";
+  position: absolute;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  height: 20px;
+  background-color: #dcdff1;
+  line-height: 20px;
+  padding: 0 5px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.group .select_list li:is(:hover, .active) {
+  background-color: #f6f6f6;
+}
+
+/* * Radio */
+.radio_inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  gap: 10px;
+}
+
+.radio_inputs label {
+  width: 100%;
+}
+
+.radio_input:checked + .radio_tile:before {
+  transform: scale(1);
+}
+
+.radio_inputs
+  label:first-child
+  .radio_input:checked
+  + .radio_tile
+  .radio_icon
+  svg {
+  fill: #4caf50;
+}
+
+.radio_inputs
+  label:first-child
+  .radio_input:checked
+  + .radio_tile
+  .radio_label {
+  color: #4caf50;
+}
+
+.radio_inputs
+  label:last-child
+  .radio_input:checked
+  + .radio_tile
+  .radio_icon
+  svg {
+  fill: #f44336;
+}
+
+.radio_inputs label:last-child .radio_input:checked + .radio_tile .radio_label {
+  color: #f44336;
+}
+
+.radio_tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 5px 0;
+  border-radius: 0.5rem;
+  border: 2px solid #eaf0f7;
+  background-color: #eaf0f7;
+  box-shadow: 0 5px 10px rgba(255, 255, 255, 0.05);
+  transition: 0.15s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio_inputs label:first-child .radio_input:checked + .radio_tile {
+  border-color: #4caf50;
+}
+
+.radio_inputs label:last-child .radio_input:checked + .radio_tile {
+  border-color: #f44336;
+}
+
+.radio_tile:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid;
+  border-radius: 50%;
+  top: 0.25rem;
+  left: 0.25rem;
+  transform: scale(0);
+  transition: 0.25s ease;
+}
+
+.radio_inputs label:first-child .radio_tile::before {
+  border-color: #4caf50;
+  background-color: #4caf50;
+}
+
+.radio_inputs label:first-child .radio_tile:hover {
+  border-color: #4caf50;
+}
+
+.radio_inputs label:last-child .radio_tile::before {
+  border-color: #f44336;
+  background-color: #f44336;
+}
+
+.radio_inputs label:last-child .radio_tile:hover {
+  border-color: #f44336;
+}
+
+.radio_inputs label:first-child .radio_tile:hover .radio_label {
+  color: #4caf50;
+}
+
+.radio_inputs label:last-child .radio_tile:hover .radio_label {
+  color: #f44336;
+}
+
+.radio_tile:hover:before {
+  transform: scale(1);
+}
+
+.radio_icon svg {
+  width: 2rem;
+  height: 2rem;
+  fill: #4f555a;
+}
+
+.radio_inputs label:first-child .radio_icon svg {
+  transform: rotate(-90deg);
+}
+
+.radio_inputs label:first-child .radio_tile:hover .radio_icon svg {
+  fill: #4caf50;
+}
+
+.radio_inputs label:last-child .radio_tile:hover .radio_icon svg {
+  fill: #f44336;
+}
+
+.radio_label {
+  color: #4f555a;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.radio_input {
+  display: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
 }

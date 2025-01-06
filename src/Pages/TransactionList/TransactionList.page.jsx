@@ -1,86 +1,82 @@
-// import style from "./TransactionList.moudle.css"
+import style from "./TransactionList.module.css";
 import { useState } from "react";
+import remove from "../../assets/delete.svg";
+import edit from "../../assets/edit.svg";
 
 const TransactionList = ({
   transactions,
   deleteTransaction,
   editTransaction,
 }) => {
-  const [editingIndex, setEditingIndex] = useState(null);
+  // const [editingIndex, setEditingIndex] = useState(null);
   const [editingTransaction, setEditingTransaction] = useState(null);
 
   const startEditing = (index) => {
-    setEditingIndex(index);
+    // setEditingIndex(index);
     setEditingTransaction(transactions[index]);
   };
 
-  const handleEditChange = (e) => {
-    const { name, value } = e.target;
-    setEditingTransaction({ ...editingTransaction, [name]: value });
-  };
-
   const saveEdit = () => {
-    editTransaction(editingIndex, editingTransaction);
-    setEditingIndex(null);
+    editTransaction(/* editingIndex */ editingTransaction);
+    // setEditingIndex(null);
     setEditingTransaction(null);
   };
 
   const cancelEdit = () => {
-    setEditingIndex(null);
+    // setEditingIndex(null);
     setEditingTransaction(null);
   };
 
   return (
-    <div>
-      <h2>Transaction List</h2>
-      <ul>
-        {transactions.map((transaction, index) => (
-          <li key={index}>
-            {editingIndex === index ? (
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  value={editingTransaction.name}
-                  onChange={handleEditChange}
-                />
-                <input
-                  type="number"
-                  name="amount"
-                  value={editingTransaction.amount}
-                  onChange={handleEditChange}
-                />
-                <input
-                  type="date"
-                  name="date"
-                  value={editingTransaction.date}
-                  onChange={handleEditChange}
-                />
-                <select
-                  name="category"
-                  value={editingTransaction.category}
-                  onChange={handleEditChange}
-                >
-                  <option value="Groceries">Groceries</option>
-                  <option value="Transportation">Transportation</option>
-                  <option value="Entertainment">Entertainment</option>
-                </select>
-                <button onClick={saveEdit}>Save</button>
-                <button onClick={cancelEdit}>Cancel</button>
-              </div>
-            ) : (
-              <span>
-                {transaction.date} - {transaction.name} - DZD{" "}
-                {transaction.amount} - {transaction.category} (
-                {transaction.type})
-                <button onClick={() => startEditing(index)}>Edit</button>
-                <button onClick={() => deleteTransaction(index)}>Delete</button>
-              </span>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className={style.transaction}>
+      <div className="container">
+        <h1 className={style.title}>transaction list</h1>
+        <div className={style.table_container}>
+          <div className={style.table}>
+            <div className={style.table_header}>
+              <h3>name</h3>
+              <h3>category</h3>
+              <h3>price</h3>
+              <h3>type</h3>
+              <h3>date</h3>
+              <h3>action</h3>
+            </div>
+            <div className={style.table_body}>
+              {transactions.map((transaction, index) => (
+                <div className={style.row} key={index}>
+                  <div className={`${style.col} ${style.col_1}`}>
+                    {transaction.name}
+                  </div>
+                  <div className={`${style.col} ${style.col_2}`}>
+                    {transaction.category}
+                  </div>
+                  <div
+                    className={`${style.col} ${style.col_3}
+                  }`}
+                  >
+                    {transaction.amount}
+                  </div>
+                  <div className={`${style.col} ${style.col_4}`}>
+                    {transaction.type}
+                  </div>
+                  <div className={`${style.col} ${style.col_5}`}>
+                    {transaction.date}
+                  </div>
+                  <div className={style.action}>
+                    <button onClick={() => startEditing(index)}>
+                      <img src={edit} alt="edit" />
+                    </button>
+                    <button onClick={() => deleteTransaction(index)}>
+                      <img src={remove} alt="remove" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

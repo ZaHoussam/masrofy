@@ -27,8 +27,25 @@
   transition: 0.4s;
   font-size: 18px;
   font-weight: 600;
+  position: relative;
 }
 
 .header .navigation a:is(:hover, .active) {
   color: var(--hover);
+}
+
+.header .navigation a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  border-radius: 10px;
+  background-color: var(--hover);
+  left: 0;
+  bottom: -4px;
+  transition: 0.4s;
+}
+
+.header .navigation a:is(:hover, .active)::after {
+  width: 100%;
 }
